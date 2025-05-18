@@ -1,0 +1,32 @@
+{
+  "name": "vue-dashboard",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "sass": "^1.87.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vuetify": "^3.8.2",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@mdi/font": "^7.4.47",
+    "@types/node": "^22.14.1",
+    "@vitejs/plugin-vue": "^5.2.2",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.5.0",
+    "@vue/tsconfig": "^0.7.0",
+    "eslint": "^9.25.1",
+    "prettier": "^3.5.3",
+    "typescript": "~5.7.2",
+    "vite": "^6.3.1",
+    "vue-tsc": "^2.2.8"
+  }
+}
