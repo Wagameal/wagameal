@@ -1,3 +1,4 @@
+import { SessionPayload } from '@/schema/common';
 import jwt,{ JwtPayload } from 'jsonwebtoken';
 
 const generateOtp = () => {
@@ -14,7 +15,7 @@ const generateOtp = () => {
     return parseInt(OTP);
 };
 
-const createJwtToken = (payload: JwtPayload & { id: string, name: string, email: string, mobile: string }) => {
+const createJwtToken = (payload: SessionPayload) => {
     const secret = process.env.JWT_SECRET || '';
     const token = jwt.sign(payload, secret, { expiresIn: "12h", algorithm: "HS256" });
     return token;
