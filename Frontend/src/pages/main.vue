@@ -3,7 +3,7 @@
       <HeaderComponent />
       <div class="relative mt-12 h-full">
         <SidePanel @toggle-view-size="adjustViewSize" @drawer-open="drawerOpen" />
-        <DefaultLayout :view-size="viewSize" />
+        <DefaultLayout :view-size="viewSize" class="" />
       </div>
       <FooterComponent />
     </v-app>

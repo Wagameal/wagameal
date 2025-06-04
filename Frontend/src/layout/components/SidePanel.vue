@@ -102,7 +102,9 @@ const items = [
   height: calc((100% - 50px) - 0px);
   border-color: var(--blue-blue-75, #80c6ff);
   background-color: #183652;
-    color: #eeeeee;
+  color: #eeeeee;
+  /* width: 225px !important; */
+
 }
 .v-list--nav {
   padding: 0 !important;

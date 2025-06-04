@@ -29,7 +29,7 @@ watch(viewSize, (newVal) => {
 
 <style>
 .core {
-  padding: 0px 0px 0px 260px;
+  padding: 0px 0px 50px 260px;
 }
 
 .open {
