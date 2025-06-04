@@ -1,6 +1,6 @@
 import { Router } from "express";
 import auth from './auth'
-import users from './user'
+import user from './user'
 import pet from "./pet";
 import meal from "./meal";
 
@@ -9,7 +9,7 @@ const router = Router();
 
 router.use('/auth', auth);
 
-router.use('/user', users);
+router.use('/user', user);
 
 router.use('/pet', pet);
 
