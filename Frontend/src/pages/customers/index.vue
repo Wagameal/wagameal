@@ -1,43 +1,68 @@
 <template>
   <div>
-    <v-card flat>
-      <v-card-title class="d-flex align-center pe-2">
-         Customers
+   <div class="d-flex justify-space-between align-center">
+      <div>
+        <Breadcrumb :items="BreadcrumbItems" />
+      </div>
+      <div>
+       <Button
+          name="Add Customer"
+          color="#183652"
+          prependIcon="mdi-plus"
+          @click="openModal()"
+        />
+      </div>
+    </div>
 
-        <v-spacer></v-spacer>
 
-        
-      </v-card-title>
+    <!-- <DataTable /> -->
 
-      <!-- <v-divider></v-divider> -->
-      
-    </v-card>
-    <v-toolbar flat>
-          <v-toolbar-title>
-            <v-icon color="medium-emphasis" icon="mdi-book-multiple" size="x-small" start></v-icon>
+    <Modal
+      title="Add Customer"
+      prependIcon="mdi-account"
+      buttonText="Add Customer"
+      :dialog="dialog"
+      @update:dialog="val => dialog = val"
+      @closeModal="closeModal"
+      @SubmitModal="submitModal"
+    >
+      <DataTable />
+    </Modal>
+    
 
-            Customer
-          </v-toolbar-title>
-
-          <v-btn
-            class="me-2 mb-2"
-            prepend-icon="mdi-plus"
-            rounded="lg"
-            text="Customer"
-            border
-            @click="add"
-          ></v-btn>
-        </v-toolbar>
-
-    <DataTable />
   </div>
 </template>
 
 <script setup lang="ts">
-import DataTable from '@components/Table/DataTable.vue'
+import { ref } from 'vue'
+import DataTable from '../../components/Table/DataTable.vue';
+import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb.vue';
+import Button from '../../components/Buttons/Button.vue';
+import Modal from '../../components/Modals/Modal.vue';
 
-  
-  
+const BreadcrumbItems = ref([
+   {
+    title: "Manage Customers",
+    disabled: false,
+    href: "Customer",
+  },
+])
+
+let dialog = ref(false);
+
+
+const openModal = () => {
+  dialog.value = true;
+};
+
+const closeModal = () => {
+  dialog.value = false;
+};
+
+const submitModal = () => {
+  console.log('Customer Added');
+  dialog.value = false;
+};
 </script>
 
 <style scoped></style>

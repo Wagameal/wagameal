@@ -1,8 +1,8 @@
 <template>
   <main :class="['transition-on duration-300 core', viewSize]">
-    <v-container>
+    <v-col>
       <RouterView />
-    </v-container>
+    </v-col>
     
   </main>
 </template>

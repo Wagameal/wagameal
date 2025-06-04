@@ -25,7 +25,7 @@ const routes = [
         component: Dashboard,
       },
       {
-        path: '/customers',
+        path: '/customer',
         name: 'Customers',
         component: Customers,
       },
