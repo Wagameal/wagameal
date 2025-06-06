@@ -1,8 +1,5 @@
 <template>
-    
-        
-      
-    <v-text-field
+  <!-- <v-text-field
           v-model="search"
           density="compact"
           label="Search"
@@ -11,71 +8,66 @@
           flat
           hide-details
           single-line
-        ></v-text-field>
-    <v-data-table
-      v-model:search="search"
-      :filter-keys="['name']"
-      
-      
-      v-model="selected"
-      :headers="headers"
-      :items="desserts"
-      item-value="name"
-      items-per-page="5"
-      return-object
-      show-select
-    ></v-data-table>
-  
-    <pre>{{ selected }}</pre>
-  </template>
+        ></v-text-field> -->
+  <v-data-table
+    v-model:search="search"
+    :filter-keys="['name']"
+    v-model="selected"
+    :headers="headers"
+    :items="items"
+    item-value="name"
+    items-per-page="5"
+    return-object
+    show-select
+  >
+    <template v-slot:item.actions="{ item }">
+      <div class="d-flex align-center ga-2 justify-center">
+        <v-icon
+          color="medium-emphasis"
+          icon="mdi-pencil"
+          size="small"
+          @click="edit(item.id)"
+        ></v-icon>
+
+        <v-icon
+          color="medium-emphasis"
+          icon="mdi-delete"
+          size="small"
+          @click="remove(item.id)"
+        ></v-icon>
+        <Switch :switch="item.isSubscribed" @update:switcher="switchFn" />
+      </div>
+    </template>
+  </v-data-table>
+</template>
 
 <script setup type="ts">
 import { ref } from 'vue'
+import Switch from '@components/Switcher/Switch.vue';
 
 const search = ref('')
-const selected = ref([])
+const selected = ref([]);
 
-const headers = ref([
-  { title: 'Sr.No.', align: 'start', key: 'sr' },
-  { title: 'Name',align: 'start',key: 'name'},
-  { title: 'Mobile', align: 'start', key: 'mobile' },
-  { title: 'Pet Count', align: 'start', key: 'petCount' },
-  { title: 'Locality', align: 'start', key: 'location' },
-  { title: 'Action', align: 'start' },
-  
-])
-const desserts = ref([
-  { sr: 1,
-    name: 'Ritesh Deshmukh',
-    mobile: 8764927654,
-    petCount: 2,
-    location: 'Mumbai'
+const props = defineProps({
+  headers: {
+    type: Array,
+    required: true
   },
-  {sr: 2,
-    name: 'Akshay Kumar',
-    mobile: 9865324564,
-    petCount: 5,
-    location: 'Mumbai'
-  },
-  
-  {sr: 3,
-    name: 'Mugdha Deshpande',
-    mobile: 914378643,
-    petCount: 4,
-    location: 'Pune'
-  },
+  items: {
+    type: Array,
+    required: true
+  }
+});
 
-  {sr: 4,
-    name: 'Swapnil Joshi',
-    mobile: 8563789345,
-    petCount: 3,
-    location: 'Pune'
-  },
-]);
+
 
 function add () {
     isEditing.value = false
     record.value = DEFAULT_RECORD
     dialog.value = true
+  }
+
+  const switchFn = (value) => {
+    console.log('Switch toggled',value);
   }
 </script>

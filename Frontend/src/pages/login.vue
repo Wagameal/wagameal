@@ -39,6 +39,7 @@
             :appendIcon="''"
             :placeholder="'Mobile Number'"
             :rules="mobileRules"
+            @update:modelValue="mobileNumber = $event"
             />
             <div
               class="text-subtitle-2 text-medium-emphasis d-flex align-center justify-space-between"
@@ -56,7 +57,7 @@
               @click:append-inner="visible = !visible"
             ></v-text-field>
 
-            <v-btn class="mb-8" color="#183652" size="large"  block>
+            <v-btn class="mb-8" color="#183652" size="large" block @click="login">
               Log In
             </v-btn>
           </v-sheet>
@@ -70,17 +71,34 @@
 import { ref } from "vue";
 import loginImage from "@images/login.png";
 import logo from "@images/logo.png";
-import InputField from "@components/Inputs/TextField.vue"
+import InputField from "@components/Inputs/TextField.vue";
+import { adminLogin} from '@utils/apiServices';
 
 const visible = ref(false);
 
-const mobileNumber = ref<any>("");
+let mobileNumber = ref<number | null>(null);
 
 const mobileRules = [
     (v: string )=> !!v || 'Number is required', 
     (v: string )=> /^[0-9]{10}$/.test(v) || 'Mobile number must be 10 digits'
     
 ]
+
+const login = async () => {
+  console.log("Mobile Number:", mobileNumber);
+  if (mobileNumber.value ) {
+    try {
+      const response = await adminLogin(mobileNumber.value);
+      console.log("Login successful:", response);
+      // Handle successful login, e.g., redirect to dashboard
+    } catch (error) {
+      console.error("Login failed:", error);
+      // Handle login failure, e.g., show an error message
+    }
+  } else {
+    console.error("Invalid mobile number");
+  }
+};
 
 </script>
 

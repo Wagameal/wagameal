@@ -29,12 +29,12 @@
   const inputValue = ref<any>("");
   
   const emit = defineEmits<{
-      (e: 'update: modelValue', value:any): void
+      (e: 'update:modelValue', value:any): void
   }>();
   
   watch(
       () => inputValue.value,
-      (val) => emit('update: modelValue', val),
+      (val) => emit('update:modelValue', val),
   );
   
   watch(
