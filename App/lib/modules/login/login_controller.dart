@@ -15,9 +15,11 @@ import '../../widgets/custom_toast_notification.dart';
 class LoginController extends GetxController {
 
   Server server = Server();
+
+  //Login
   PayloadLogin? payloadLogin;
 
-  //Banner
+  //Home screen Banner
   int currentIndexBanner = 0;
   int? totalIndexVoucher;
   final CarouselSliderController carouselControllerBanner =  CarouselSliderController();
@@ -27,7 +29,6 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getBannerList();
   }
 
   void sentOtp() async {
@@ -100,12 +101,11 @@ class LoginController extends GetxController {
     }
   }
 
-
   void userLoginVerify() async {
     try {
       RequestLogin requestLogin = RequestLogin();
       requestLogin.mobile = "9156327926";
-      requestLogin.otp = "3429";
+      requestLogin.otp = "2245";
 
       ResponseLogin response = await server.userLoginVerify(requestLogin);
       if (response.success == true) {
@@ -116,6 +116,7 @@ class LoginController extends GetxController {
         await PreferenceUtils.setString("wagameal_app_token","${payloadLogin?.token}");
         debugPrint("======${payloadLogin?.user?.name}");
         getMeal();
+        getBannerList();
       } else {
         // CustomToastNotification.display('${response.status?.message}',NotificationType.error);
         // isLoginButtonLoading.value = false;
@@ -169,8 +170,9 @@ class LoginController extends GetxController {
     try {
       ResponseLogin response = await server.getBannerList();
       if (response.success == true) {
-        debugPrint("======");
-        // payloadLogin = PayloadLogin.fromJson(response.data);
+        bannerList = (response.data as List)
+            .map((e) => Banners.fromJson(e))
+            .toList();
         update();
       } else {
         // CustomToastNotification.display('${response.status?.message}',NotificationType.error);

@@ -36,7 +36,7 @@ class LoginState extends State<LoginScreen> {
                     pauseAutoPlayInFiniteScroll: true,
                     autoPlayInterval:const Duration(seconds: 4),
                     autoPlayAnimationDuration:const Duration(milliseconds: 1000),
-                    viewportFraction: 0.85,
+                    viewportFraction: 1,
                     padEnds: false,
                     onPageChanged: (index, reason) {
                       controller.currentIndexBanner = index;
@@ -107,6 +107,20 @@ class LoginState extends State<LoginScreen> {
                       height: 50,
                       color: Colors.red,
                       child: Center(child: Text("Verify OTP"))),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                  onTap: (){
+                    controller.getBannerList();
+                  },
+                  child: Container(
+                      width: 100,
+                      height: 50,
+                      color: Colors.red,
+                      child: Center(child: Text("Get Banner"))),
                 ),
               ),
 

@@ -22,7 +22,7 @@ abstract class Api {
   @GET("/api/meal")
   Future<ResponseLogin> getMeal(@Header('authorization') String token);
 
-  @GET("/api/meal")
+  @GET("/api/banner")
   Future<ResponseLogin> getBannerList(@Header('authorization') String token);
 
 

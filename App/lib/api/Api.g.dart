@@ -171,7 +171,7 @@ class _Api implements Api {
     )
         .compose(
           _dio.options,
-          '/api/meal',
+          '/api/banner',
           queryParameters: queryParameters,
           data: _data,
         )

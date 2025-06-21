@@ -85,6 +85,7 @@ class Server {
   }
 
   Future<ResponseLogin> getBannerList() async {
+    debugPrint("==getBannerList========11=");
     ResponseLogin response = await api!.getBannerList("Bearer ${PreferenceUtils.getString("wagameal_app_token")}");
     return response;
   }
