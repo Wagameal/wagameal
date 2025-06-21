@@ -1,5 +1,8 @@
 import 'package:app/theme/theme_extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../theme/app_colours.dart';
 
 class CustomButton extends StatefulWidget {
   final Function? onPressed;
@@ -34,12 +37,12 @@ class _CustomButtonState extends State<CustomButton> {
           decoration: BoxDecoration(
               border: Border.all(
                 color: !widget.isButtonDisable
-                    ?  context.enableBtnBorderColor
-                    :  context.disableBtnBorderColor,
+                    ?  AppColours.primaryColorWM
+                    :  AppColours.disableButtonTextColor,
               ),
               color: !widget.isButtonDisable
-                  ?  context.enableButtonColor
-                  : context.disableButtonColor,
+                  ?  AppColours.primaryColorWM
+                  : AppColours.forwardArrowColor,
               borderRadius: const BorderRadius.all(Radius.circular(12))),
           child: widget.isButtonDisable == true
               ?  Center(
@@ -57,8 +60,8 @@ class _CustomButtonState extends State<CustomButton> {
               widget.buttonTextValue,
               style: TextStyle(
                 color: !widget.isButtonDisable
-                    ? context.enableBtnTextColor
-                    : context.disableBtnTextColor,
+                    ? AppColours.textColor
+                    : AppColours.disableButtonTextColor,
                 fontFamily: "NunitoSansSemiBold",
                 fontWeight: FontWeight.w600,
                 fontSize: 18,

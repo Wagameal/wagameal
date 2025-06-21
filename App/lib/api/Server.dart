@@ -64,14 +64,34 @@ class Server {
     api = Api(dio,baseUrl: dotenv.env['baseURL']!);
   }
 
-  Future<ResponseLogin> userLogin(RequestLogin request) async {
-    ResponseLogin response = await api!.userLogin(request);
+  Future<ResponseLogin> sentOtp(RequestLogin request) async {
+    ResponseLogin response = await api!.sentOtp(request);
     return response;
   }
+  Future<ResponseLogin> resendOtp(RequestLogin request) async {
+    ResponseLogin response = await api!.resendOtp(request);
+    return response;
+  }
+
+
   Future<ResponseLogin> userLoginVerify(RequestLogin request) async {
     ResponseLogin response = await api!.userLoginVerify(request);
     return response;
   }
+
+  Future<ResponseLogin> getMeal() async {
+    ResponseLogin response = await api!.getMeal("Bearer ${PreferenceUtils.getString("wagameal_app_token")}");
+    return response;
+  }
+
+  Future<ResponseLogin> getBannerList() async {
+    ResponseLogin response = await api!.getBannerList("Bearer ${PreferenceUtils.getString("wagameal_app_token")}");
+    return response;
+  }
+
+
+
+
 
 
 

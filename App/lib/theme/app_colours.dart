@@ -6,6 +6,8 @@ class AppColours {
 
 
 
+
+
   static const Color errorColor = Color(0xffff0000);
   static const Color errorColorPink = Color(0xffFEA1FF);
   static const Color secondary900Color = Color(0xff4A5E6D);

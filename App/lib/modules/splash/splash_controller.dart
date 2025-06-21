@@ -14,8 +14,8 @@ class SplashController extends GetxController {
   void startTimer() {
     // PreferenceUtils.init();
     Future.delayed(const Duration(seconds: 2), () async {
-      // Get.offAll(const OnBoardingScreen(), binding: OnBoardingBinding());
-      Get.offAll(const LoginScreen(), binding: LoginBinding());
+      Get.offAll(const OnBoardingScreen(), binding: OnBoardingBinding());
+      // Get.offAll(const LoginScreen(), binding: LoginBinding());
       // PreferenceUtils.init();
       // debugPrint("value==1=${PreferenceUtils.getString("knoopay_device_info_ip_address").toString()}");
       //

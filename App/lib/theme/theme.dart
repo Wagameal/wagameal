@@ -29,7 +29,7 @@ final ThemeData primaryTheme = ThemeData(
   ),
 
   //BotomNavigationBar
-  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
     selectedItemColor: AppColours.newThemePrimaryColor,
     unselectedItemColor: AppColours.subTextColor,
@@ -51,7 +51,7 @@ final ThemeData primaryTheme = ThemeData(
   ),
 
   //divider
-  dividerTheme: DividerThemeData(
+  dividerTheme: const DividerThemeData(
       color: AppColours.dividerColor,
       thickness: 1,
       space: 1
@@ -92,26 +92,26 @@ final ThemeData primaryTheme = ThemeData(
     ),
   ),
 
-  inputDecorationTheme: InputDecorationTheme(
-    enabledBorder: const OutlineInputBorder(
+  inputDecorationTheme: const InputDecorationTheme(
+    enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(
           color: AppColours.textFeildBorderColor,width: 1),
       borderRadius: BorderRadius.all(Radius.circular(12)),
     ),
     hintStyle: TextStyle( color: AppColours.textFeildBorderColor, fontSize: 16,fontWeight: FontWeight.w400,fontFamily: "NunitoSansRegular"),
-    border:  const OutlineInputBorder(
+    border:  OutlineInputBorder(
       borderSide: BorderSide(color: AppColours.textFeildBorderColor,width: 1),
       borderRadius: BorderRadius.all(Radius.circular(12)),
     ),
-    disabledBorder: const OutlineInputBorder(
+    disabledBorder: OutlineInputBorder(
       borderSide: BorderSide( color: AppColours.textFeildBorderColor,width: 1),
       borderRadius: BorderRadius.all(Radius.circular(12)),
     ),
-    focusedBorder: const OutlineInputBorder(
+    focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: AppColours.textFeildBorderColor,width: 1),
       borderRadius: BorderRadius.all(Radius.circular(12)),
     ),
-    errorBorder: const OutlineInputBorder(
+    errorBorder: OutlineInputBorder(
       // borderSide: BorderSide(color: AppColours.errorTextColor, width: 1),
       borderSide: BorderSide(color: AppColours.errorColorPink, width: 1),
       borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -120,7 +120,7 @@ final ThemeData primaryTheme = ThemeData(
       color: AppColours.errorColorPink,
       fontSize: 12,
     ),
-    focusedErrorBorder: const OutlineInputBorder(
+    focusedErrorBorder: OutlineInputBorder(
       // borderSide: BorderSide(color: AppColours.errorTextColor, width: 1),
       borderSide: BorderSide(color: AppColours.errorColorPink, width: 1),
       borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -131,7 +131,7 @@ final ThemeData primaryTheme = ThemeData(
   tabBarTheme: TabBarTheme(
     overlayColor: WidgetStateProperty.all(Colors.transparent),
     indicatorColor: Colors.transparent,
-    indicator: BoxDecoration(
+    indicator: const BoxDecoration(
       color: AppColours.newThemeServicesSvgBg,
       // color: Colors.grey,
       border: Border(
@@ -171,7 +171,7 @@ final ThemeData primaryTheme = ThemeData(
     CustomThemeExtension(
       //Pinput
         customPinTheme: CustomPinTheme(
-            defaultPinTheme: PinTheme(
+            defaultPinTheme: const PinTheme(
               width: 24,
               height: 45,
               textStyle: TextStyle(fontSize: 28, color: AppColours.secondary900Color,
@@ -183,7 +183,7 @@ final ThemeData primaryTheme = ThemeData(
                 // border: Border(bottom: BorderSide(color: AppColours.secondary800Color, width: 1)),
               ),
             ),
-            focusedPinTheme: PinTheme(
+            focusedPinTheme: const PinTheme(
               width: 24,
               height: 45,
               textStyle: TextStyle(fontSize: 28, color: AppColours.secondary900Color,
@@ -195,7 +195,7 @@ final ThemeData primaryTheme = ThemeData(
                 border: Border(bottom: BorderSide(color: Colors.white, width: 1)),
               ),
             ),
-            errorPinTheme: PinTheme(
+            errorPinTheme: const PinTheme(
               width: 24,
               height: 45,
               textStyle: TextStyle(fontSize: 28, color: AppColours.secondary900Color,
@@ -264,7 +264,7 @@ final ThemeData primaryTheme = ThemeData(
             circularProgressIndicatorColor: AppColours.newThemePrimaryColor
         ),
 
-        customLinearGradient: LinearGradient(
+        customLinearGradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
@@ -275,7 +275,7 @@ final ThemeData primaryTheme = ThemeData(
           stops: [0.0, 0.3],
         ),
 
-        customLinearGradientHalfScreen: LinearGradient(
+        customLinearGradientHalfScreen: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
@@ -286,7 +286,7 @@ final ThemeData primaryTheme = ThemeData(
           stops: [0.2, 1.0],
         ),
 
-        customLinearGradientFullScreen: LinearGradient(
+        customLinearGradientFullScreen: const LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
@@ -326,12 +326,12 @@ final ThemeData primaryTheme = ThemeData(
             border: Border.all(color: AppColours.newThemePrimaryColor)
         ),
 
-        circularBgForUserInitial: BoxDecoration(
+        circularBgForUserInitial: const BoxDecoration(
           color: AppColours.initialUserBgColor,
           shape: BoxShape.circle,
         ),
 
-        customLoading: Padding(
+        customLoading: const Padding(
             padding: EdgeInsets.all(8.0),
             child: SizedBox(
               width: double.infinity,
