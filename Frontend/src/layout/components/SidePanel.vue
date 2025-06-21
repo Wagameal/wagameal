@@ -88,7 +88,7 @@ const toggleDrawer = () => {
 
 const items = [
     { text: 'Dashboard', icon: 'mdi-view-dashboard', path: '/dashboard' },
-    { text: 'Manage Customers', icon: 'mdi-account-box-multiple', path: '/customers' },
+    { text: 'Manage Customers', icon: 'mdi-account-box-multiple', path: '/customer' },
     { text: 'Sampal Enquiry', icon: 'mdi-calendar-question', path: '/enquiry' },
     { text: 'Subscriptions', icon: 'mdi-text-box-check', path: '/subscription' },
     { text: 'Manage Products', icon: 'mdi-nutrition', path: '/products' },

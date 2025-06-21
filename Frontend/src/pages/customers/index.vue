@@ -60,12 +60,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import DataTable from '@components/Table/DataTable.vue';
 import Breadcrumb from '@components/Breadcrumbs/Breadcrumb.vue';
 import Button from '@components/Buttons/Button.vue';
 import Modal from '@components/Modals/Modal.vue';
 import ButtonIcon from '@components/Buttons/ButtonIcon.vue';
+import {getAllUsers} from '@utils/apiServices';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const BreadcrumbItems = ref([
    {
@@ -117,6 +120,24 @@ const desserts = ref([
   },
 ]);
 
+const getAllUser = async () => {
+  try {
+    const response = await getAllUsers();
+    console.log('Users Data:', response.data.data);
+    // Assuming response.data is an array of user objects
+    // const desserts = response.data.data.map((user, index) => ({
+    //   sr: index + 1,
+    //   name: user.name,
+    //   mobile: user.mobile,
+    //   petCount: user.petCount,
+    //   location: user.location,
+    //   isSubscribed: user.isSubscribed
+    // }));
+    // Process the data as needed
+  } catch (error) {
+    console.error('Error fetching users:', error);
+  }
+};
 
 let dialog = ref(false);
 
@@ -133,6 +154,12 @@ const submitModal = () => {
   console.log('Customer Added');
   dialog.value = false;
 };
+
+
+onMounted(() => {
+  getAllUser();
+});
+
 </script>
 
 <style scoped></style>

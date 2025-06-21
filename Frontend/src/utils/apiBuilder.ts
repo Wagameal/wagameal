@@ -1,13 +1,17 @@
 import axios from "axios";
 import type { AxiosResponse, AxiosRequestConfig } from "axios";
 
-const token = "";
+const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+console.log("tsorn", token)
 
 export const getRequest = (url: string): Promise<AxiosResponse> => {
-  const headers: any = {};
+  const headers: any = {
+    withCredentials: true,
+  };
   if (token) {
-    headers["Authentication"] = "Bearer " + token;
+    headers["Authorization"] = "Bearer " + token;
   }
+  console.log("getRequest", headers);
   return axios.get(url, headers);
 };
 
@@ -17,7 +21,7 @@ export const getRequestWithData = (
 ): Promise<AxiosResponse> => {
   const headers: any = {};
   if (token) {
-    headers["Authentication"] = "Bearer " + token;
+    headers["Authorization"] = "Bearer " + token;
   }
   const config: AxiosRequestConfig = {
     params: data,
@@ -29,7 +33,7 @@ export const getRequestWithData = (
 export const postRequest = (url: string, data: any): Promise<AxiosResponse> => {
   const headers: any = {};
   if (token) {
-    headers["Authentication"] = "Bearer " + token;
+    headers["Authorization"] = "Bearer " + token;
   };
   return axios.post(url, data, headers);
 };
@@ -37,7 +41,7 @@ export const postRequest = (url: string, data: any): Promise<AxiosResponse> => {
 export const postRequestWithId = (url: string): Promise<AxiosResponse> => {
   const headers: any = {};
   if (token) {
-    headers["Authentication"] = "Bearer " + token;
+    headers["Authorization"] = "Bearer " + token;
   }
   return axios.post(url, null, headers);
 };
@@ -45,7 +49,7 @@ export const postRequestWithId = (url: string): Promise<AxiosResponse> => {
 export const putRequest = (url: string, data: any): Promise<AxiosResponse> => {
   const headers: any = {};
   if (token) {
-    headers["Authentication"] = "Bearer " + token;
+    headers["Authorization"] = "Bearer " + token;
   }
   return axios.put(url, data, headers);
 };
@@ -56,7 +60,7 @@ export const putRequestWithData = (
 ): Promise<AxiosResponse> => {
   const headers: any = {};
   if (token) {
-    headers["Authentication"] = "Bearer " + token;
+    headers["Authorization"] = "Bearer " + token;
   }
   const config: AxiosRequestConfig = {
     params: data,
@@ -72,7 +76,7 @@ export const deleteRequest = (
 ): Promise<AxiosResponse> => {
   const headers: any = {};
   if (token) {
-    headers["Authentication"] = "Bearer " + token;
+    headers["Authorization"] = "Bearer " + token;
   }
 
   const config: AxiosRequestConfig = {
@@ -89,7 +93,7 @@ export const deleteRequestWithData = (
 ): Promise<AxiosResponse> => {
   const headers: any = {};
   if (token) {
-    headers["Authentication"] = "Bearer " + token;
+    headers["Authorization"] = "Bearer " + token;
   }
 
   const config: AxiosRequestConfig = {
@@ -103,7 +107,7 @@ export const deleteRequestWithData = (
 export const deleteRequestWithId = (url: string): Promise<AxiosResponse> => {
   const headers: any = {};
   if (token) {
-    headers["Authentication"] = "Bearer " + token;
+    headers["Authorization"] = "Bearer " + token;
   }
   return axios.delete(url, headers);
 };

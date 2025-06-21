@@ -14,7 +14,7 @@ export const adminSchema = z.object({
   password: z.string({
     required_error: "Password is required",
     invalid_type_error: "Password must be a string"
-  }).min(6, "Password must be at least 6 characters"),
+  }).min(5, "Password must be at least 5 characters"),
   mobile: z.string({
     required_error: "Mobile number is required",
     invalid_type_error: "Mobile number must be a string"
