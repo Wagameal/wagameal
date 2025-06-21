@@ -5,14 +5,15 @@ const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 console.log("tsorn", token)
 
 export const getRequest = (url: string): Promise<AxiosResponse> => {
-  const headers: any = {
-    withCredentials: true,
-  };
+  const headers: any = {};
   if (token) {
     headers["Authorization"] = "Bearer " + token;
   }
-  console.log("getRequest", headers);
-  return axios.get(url, headers);
+  const config: AxiosRequestConfig = {
+    headers
+  };
+  console.log("getRequest", config);
+  return axios.get(url, config);
 };
 
 export const getRequestWithData = (

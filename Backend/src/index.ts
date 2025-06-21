@@ -17,7 +17,7 @@ const corsOption = {
 // Middleware
 app.use(express.json());
 app.use(cors(corsOption));
-app.use(errorHandler);
+
 
 // MongoDB Connection
 connectDB()
@@ -27,6 +27,8 @@ app.get('/', (req: Request,res: Response) => {
 })
 
 app.use('/api', routes);
+
+app.use(errorHandler);
 
 // Start Server
 app.listen(port, () => {
