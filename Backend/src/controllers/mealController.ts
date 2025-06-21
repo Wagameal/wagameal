@@ -7,7 +7,7 @@ import Meal, { mealSchema } from '@/models/meal';
 export const createMeal = async (req: Request, res: Response, next: NextFunction) => {
     try {
         if (!req.user?.id) {
-            return next(new HttpException(401, 'Admin is not authenticated'));
+            return next(new HttpException(500, 'Admin is not authenticated'));
         }
 
         const validatedData = mealSchema.safeParse(req.body);
@@ -56,7 +56,7 @@ export const getMeals = async (req: Request, res: Response, next: NextFunction) 
         });
     } catch (error) {
         if (error instanceof z.ZodError) {
-            return next(new HttpException(400, 'Invalid meal data', error.errors));
+            return next(new HttpException(500, 'Invalid meal data', error.errors));
         }
         next(new HttpException(500, 'Error fetching meals'));
     }

@@ -12,7 +12,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   try {
     const validatedData = loginSchema.safeParse(req.body);
     if (!validatedData.success) {
-      throw new HttpException(400, 'Validation failed', validatedData.error);
+      throw new HttpException(500, 'Validation failed', validatedData.error);
     }
     const { mobile } = validatedData.data;
     const otpExists = await Otp.findOne({ mobile });
@@ -43,7 +43,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   } catch (error) {
 
     if (error instanceof z.ZodError) {
-      return next(new HttpException(400, 'Validation failed', error));
+      return next(new HttpException(500, 'Validation failed', error));
     }
 
     console.error('Error sending OTP:', error);
@@ -57,28 +57,28 @@ export const verifyOtp = async (req: Request, res: Response, next: NextFunction)
     const validatedData = verifyOtpSchema.safeParse(req.body);
     
     if (!validatedData.success) {
-      throw new HttpException(400, 'Validation failed', validatedData.error);
+      throw new HttpException(500, 'Validation failed', validatedData.error);
     }
 
     const { mobile, otp } = validatedData.data;
     const otpRecord = await Otp.findOne({ mobile });
     const currentTime = new Date();
     if(!otpRecord){
-      res.status(400).json({
+      res.status(500).json({
         success: false,
         message: 'OTP not found',
       }); 
     }
     else {
       if (otpRecord.expirationTime < currentTime) {
-        res.status(400).json({
+        res.status(500).json({
           success: false,
           message: 'OTP expired',
         });
       }
       else {
         if (otpRecord.otp !== otp) {
-          res.status(400).json({
+          res.status(500).json({
             success: false,
             message: 'Invalid OTP',
           });
@@ -110,7 +110,7 @@ export const verifyOtp = async (req: Request, res: Response, next: NextFunction)
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return next(new HttpException(400, 'Validation failed', error));
+      return next(new HttpException(500, 'Validation failed', error));
     }
     console.error('Error verifying OTP:', error);
     next(new HttpException(500, 'Internal Server Error'));
@@ -126,7 +126,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
       if (!validatedData.success) {
         // If validation fails, throw an error with details
         throw new HttpException(
-          400,
+          500,
           'Validation failed',
           validatedData.error
         );
@@ -154,7 +154,7 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
     } catch (error) {
       if (error instanceof z.ZodError) {
         // Handle validation errors
-        return next(new HttpException(400, 'Validation failed', error));
+        return next(new HttpException(500, 'Validation failed', error));
       }
       console.error('Error creating user:', error);
       next(new HttpException(500, 'Internal Server Error'));
@@ -166,7 +166,7 @@ export const resendOtp = async (req: Request, res: Response, next: NextFunction)
   try {
     const validatedData = loginSchema.safeParse(req.body);
     if (!validatedData.success) {
-      throw new HttpException(400, 'Validation failed', validatedData.error);
+      throw new HttpException(500, 'Validation failed', validatedData.error);
     }
     const { mobile } = validatedData.data;
     const otpExists = await Otp.findOne({ mobile });
@@ -196,7 +196,7 @@ export const resendOtp = async (req: Request, res: Response, next: NextFunction)
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return next(new HttpException(400, 'Validation failed', error));
+      return next(new HttpException(500, 'Validation failed', error));
     }
     console.error('Error sending OTP:', error);
     next(new HttpException(500, 'Internal Server Error'));
@@ -209,7 +209,7 @@ export const sendEmailOtp = async (req: Request, res: Response, next: NextFuncti
     const validatedData = emailSchema.safeParse(req.body);
 
     if (!validatedData.success) {
-      throw new HttpException(400, 'Validation failed', validatedData.error);
+      throw new HttpException(500, 'Validation failed', validatedData.error);
     }
 
     const { email } = validatedData.data;
@@ -234,7 +234,7 @@ export const sendEmailOtp = async (req: Request, res: Response, next: NextFuncti
 
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return next(new HttpException(400, 'Validation failed', error));
+      return next(new HttpException(500, 'Validation failed', error));
     }
     console.error('Error sending email OTP:', error);
     next(new HttpException(500, 'Internal Server Error'));
@@ -248,7 +248,7 @@ export const verifyEmail = async (req: Request, res: Response, next: NextFunctio
     const validatedData = verifyEmailSchema.safeParse(req.body);
 
     if (!validatedData.success) {
-      throw new HttpException(400, 'Validation failed', validatedData.error);
+      throw new HttpException(500, 'Validation failed', validatedData.error);
     }
 
     const { email, otp } = validatedData.data;
@@ -258,20 +258,20 @@ export const verifyEmail = async (req: Request, res: Response, next: NextFunctio
     const currentTime = new Date();
 
     if (!otpRecord) {
-      res.status(400).json({
+      res.status(500).json({
         success: false,
         message: 'OTP not found',
       });
     }
     else {
       if (otpRecord.expirationTime < currentTime) {
-        res.status(400).json({
+        res.status(500).json({
           success: false,
           message: 'OTP expired',
         });
       }
       if (otpRecord.otp !== otp) {
-        res.status(400).json({
+        res.status(500).json({
           success: false,
           message: 'Invalid OTP',
         });
@@ -293,7 +293,7 @@ export const verifyEmail = async (req: Request, res: Response, next: NextFunctio
     }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return next(new HttpException(400, 'Validation failed', error));
+      return next(new HttpException(500, 'Validation failed', error));
     }
     console.error('Error verifying email:', error);
     next(new HttpException(500, 'Internal Server Error'));
@@ -308,7 +308,7 @@ export const adminLogin = async (req: Request, res: Response, next: NextFunction
     const validatedData = adminLoginSchema.safeParse(req.body);
 
     if (!validatedData.success) {
-        next(new HttpException(400, 'Validation failed', validatedData.error));
+        next(new HttpException(500, 'Validation failed', validatedData.error));
     }
     else {
       const { mobile, password } = validatedData.data;
@@ -325,10 +325,8 @@ export const adminLogin = async (req: Request, res: Response, next: NextFunction
       // Verify password (assuming you have a password verification method)
       // This depends on how you're storing passwords (hopefully hashed)
       const isValidPassword = admin?.password == password;
-      console.log('Is valid password', admin?.password)
-         console.log('Is valid password=====', password)
       if (!isValidPassword) {
-          next(new HttpException(401, 'Invalid credentials++++++'));
+          next(new HttpException(401, 'Invalid credentials'));
       }
       else {
         const adminObject = {
@@ -352,7 +350,7 @@ export const adminLogin = async (req: Request, res: Response, next: NextFunction
     } 
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return next(new HttpException(400, 'Validation failed', error));
+      return next(new HttpException(500, 'Validation failed', error));
     }
     console.error('Admin login error:', error);
     next(error instanceof HttpException ? error : new HttpException(500, 'Internal Server Error'));
