@@ -302,6 +302,7 @@ export const verifyEmail = async (req: Request, res: Response, next: NextFunctio
 
 // This function is used for admin login
 export const adminLogin = async (req: Request, res: Response, next: NextFunction) => {
+  console.log('Admin login request received:', req.body);
   try {
     // Validate request body
     const validatedData = adminLoginSchema.safeParse(req.body);
@@ -310,11 +311,12 @@ export const adminLogin = async (req: Request, res: Response, next: NextFunction
         next(new HttpException(400, 'Validation failed', validatedData.error));
     }
     else {
-      const { email, password } = validatedData.data;
+      const { mobile, password } = validatedData.data;
       // Find admin user
       const admin = await Admin.findOne({ 
-          email
+          mobile
       });
+      console.log('Admin found:', admin);
 
       if (!admin) {
           next(new HttpException(401, 'Invalid credentials'));
@@ -322,9 +324,11 @@ export const adminLogin = async (req: Request, res: Response, next: NextFunction
 
       // Verify password (assuming you have a password verification method)
       // This depends on how you're storing passwords (hopefully hashed)
-      const isValidPassword = admin?.password === password;
+      const isValidPassword = admin?.password == password;
+      console.log('Is valid password', admin?.password)
+         console.log('Is valid password=====', password)
       if (!isValidPassword) {
-          next(new HttpException(401, 'Invalid credentials'));
+          next(new HttpException(401, 'Invalid credentials++++++'));
       }
       else {
         const adminObject = {

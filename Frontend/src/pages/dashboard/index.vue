@@ -33,10 +33,10 @@
             </v-card-item>
           </v-card> -->
 
-          <v-card class="mx-auto" subtitle="Customes" title="790">
+          <v-card class="mx-auto" :subtitle="cardItem.title" :title="cardItem.value">
             <template v-slot:prepend>
-              <v-avatar color="blue-darken-2">
-                <v-icon icon="mdi-alarm"></v-icon>
+              <v-avatar :color="cardItem.color" variant="elevated">
+                <v-icon :icon="cardItem.icon"></v-icon>
               </v-avatar>
             </template>
           </v-card>
@@ -91,10 +91,10 @@ const variants = ["elevated", "flat", "tonal", "outlined"];
 const color = ref("indigo");
 
 const cardItems = ref([
-  { icon: "mdi-account", value: 2000, title: "Customers" },
-  { icon: "mdi-account", value: 2000, title: "Customers" },
-  { icon: "mdi-account", value: 2000, title: "Customers" },
-  { icon: "mdi-account", value: 2000, title: "Customers" },
+  { icon: "mdi-account-multiple-outline", value: 2000, title: "Total Customers", color: "indigo" },
+  { icon: "mdi-truck-delivery-outline", value: 12000, title: "Total Dilevery", color: "indigo" },
+  { icon: "mdi-food-takeout-box-outline", value: 350, title: "Total Sampal", color: "indigo" },
+  { icon: "mdi-calendar-month-outline", value: 1500, title: "Total Subscription", color: "indigo" },
 ]);
 
 const value = ref([

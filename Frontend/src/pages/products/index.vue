@@ -1,32 +1,60 @@
 <template>
+    <div>
+        <div class="d-flex justify-space-between align-center">
+      <div>
+        <Breadcrumb :items="BreadcrumbItems" />
+      </div>
+      <div class="d-flex align-center ga-4">
+        <ButtonIcon
+          :icon="'mdi-magnify'"
+          
+          :size="'small'"
+          :title="'Search Product'"
+         
+        />
+        <ButtonIcon
+          :icon="'mdi-filter'"
+          
+          :size="'small'"
+          :title="'Filter Product'"
+         
+        />
+        <ButtonIcon
+          :icon="'mdi-download'"
+          
+          :size="'small'"
+          :title="'Download Product list'"
+         
+        />
+        <!-- <v-icon
+          color="medium-emphasis"
+          icon="mdi-pencil"
+          size="small"
+        ></v-icon> -->
+       <Button
+          name="Product"
+          color="#183652"
+          prependIcon="mdi-plus"
+          @click="openModal()"
+        />
+      </div>
+    </div>
+
   <v-card flat>
-    <v-card-title class="d-flex align-center pe-2">
-      <v-icon icon="mdi-video-input-component"></v-icon> &nbsp;
-      Products
+    
 
-      <v-spacer></v-spacer>
-
-      <v-text-field
-        v-model="search"
-        density="compact"
-        label="Search"
-        prepend-inner-icon="mdi-magnify"
-        variant="solo-filled"
-        flat
-        hide-details
-        single-line
-      ></v-text-field>
-    </v-card-title>
-
-    <v-divider></v-divider>
-    <v-data-table
-      v-model:search="search"
-      :filter-keys="['name']"
-      :items="items"
-    >
-      <template v-slot:header.stock>
-        <div class="text-end">Stock</div>
-      </template>
+   <v-data-table
+    v-model:search="search"
+    :filter-keys="['name']"
+    v-model="selected"
+    :headers="headers"
+    :items="items"
+    item-value="name"
+    items-per-page="5"
+    return-object
+    show-select
+  >
+      
 
       <template v-slot:item.image="{ item }">
         <v-card class="my-2" elevation="2" rounded>
@@ -38,69 +66,89 @@
         </v-card>
       </template>
 
-      <template v-slot:item.category="{ item }">
-        <div
-          :model-value="item.category"
-          color="orange-darken-2"
-          density="compact"
-          size="small"
-          readonly
-        >{{item.category}}</div>
-      </template>
+      
 
-      <template v-slot:item.stock="{ item }">
-        <div class="text-end">
-          <v-chip
-            :color="item.stock ? 'green' : 'red'"
-            :text="item.stock ? 'In stock' : 'Out of stock'"
-            class="text-uppercase"
-            size="small"
-            label
-          ></v-chip>
-        </div>
+      <template v-slot:item.action="{ item }">
+        <div class="d-flex align-center ga-2 justify-center">
+        <v-icon
+          color="medium-emphasis"
+          icon="mdi-pencil"
+          size="small"
+          @click="edit(item.id)"
+        ></v-icon>
+
+        <v-icon
+          color="medium-emphasis"
+          icon="mdi-delete"
+          size="small"
+          @click="remove(item.id)"
+        ></v-icon>
+        <Switch :switch="item.isSubscribed" @update:switcher="switchFn" />
+      </div>
       </template>
     </v-data-table>
   </v-card>
+
+    </div>
 </template>
+
 <script setup lang="ts">
-  import { ref } from 'vue'
+
+import { ref } from 'vue'
+import Switch from '@components/Switcher/Switch.vue';
+import Breadcrumb from '@components/Breadcrumbs/Breadcrumb.vue';
+import Button from '@components/Buttons/Button.vue';
+import Modal from '@components/Modals/Modal.vue';
+import ButtonIcon from '@components/Buttons/ButtonIcon.vue';
 
   const search = ref('')
+  const BreadcrumbItems = ref([
+   {
+    title: "Manage Products",
+    disabled: false,
+    href: "Product",
+  },
+]);
   const items = [
     {
-      name: 'Wholesome meal',
+      sr:1,
+      name:'Product 1',
       image: '1.png',
-      price: 699.99,
-      category: 5,
-      stock: true,
+      category: 'Dog',
+      action: true,
     },
     {
-      name: 'Wholesome meal',
+      sr:2,
+      name:'Product 2',
       image: '2.png',
-      price: 799.99,
-      category: 4,
-      stock: false,
+      category: 'Cat',
+      action: false,
     },
     {
-      name: 'Wholesome meal',
+      sr:3,
+      name:'Product 3',
       image: '3.png',
-      price: 649.99,
-      category: 3,
-      stock: true,
+      category: 'Dog',
+      action: true,
     },
     {
-      name: 'Wholesome meal',
+      sr:4,
+      name:'Product 4',
       image: '4.png',
-      price: 1499.99,
-      category: 4,
-      stock: true,
+      category: 'Cat',
+      action: true,
     },
     {
-      name: 'Wholesome meal',
+      sr:5,
+      name:'Product 5',
       image: '5.png',
-      price: 299.99,
-      category: 4,
-      stock: false,
+      category: 'Dog',
+      action: false,
     },
   ]
+
 </script>
+
+<style scoped>
+
+</style>

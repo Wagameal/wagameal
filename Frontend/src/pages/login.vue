@@ -50,6 +50,8 @@
             <v-text-field
               :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
               :type="visible ? 'text' : 'password'"
+              v-model="password"
+              :rules="[(v) => !!v || 'Password is required']"
               density="compact"
               placeholder="Enter your password"
               prepend-inner-icon="mdi-lock-outline"
@@ -73,10 +75,18 @@ import loginImage from "@images/login.png";
 import logo from "@images/logo.png";
 import InputField from "@components/Inputs/TextField.vue";
 import { adminLogin} from '@utils/apiServices';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+const $router = useRouter();
+
+
+const store = useStore();
 
 const visible = ref(false);
 
+
 let mobileNumber = ref<number | null>(null);
+let password = ref<string>("");
 
 const mobileRules = [
     (v: string )=> !!v || 'Number is required', 
@@ -88,8 +98,20 @@ const login = async () => {
   console.log("Mobile Number:", mobileNumber);
   if (mobileNumber.value ) {
     try {
-      const response = await adminLogin(mobileNumber.value);
-      console.log("Login successful:", response);
+      let data = {
+        mobile: mobileNumber.value,
+        password: password.value
+      };
+      const response = await adminLogin(data);
+
+      
+      // Assuming response contains user data or a success message
+      console.log("Login response:", response.data.data.token, response.data.data.user);
+      store.dispatch('loginUser', {
+        userData: response.data.data.user,
+        token: response.data.data.token
+      });
+      $router.push('/dashboard'); // Redirect to dashboard after successful login
       // Handle successful login, e.g., redirect to dashboard
     } catch (error) {
       console.error("Login failed:", error);

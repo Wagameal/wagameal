@@ -60,7 +60,6 @@ const props = defineProps({
 });
 
 
-
 function add () {
     isEditing.value = false
     record.value = DEFAULT_RECORD
